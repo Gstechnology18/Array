@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gereciador array</title>
+</head>
+<body>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url(fundoarray.gif);
+    background-size: cover;
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    color: #50aee8;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+input[type="text"] {
+    width: 50%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+
+    button{
+        /* display: inline-block;: utilizei para controlar a altura e largura do botão*/
+        /* padding: utilizei para controlar o espaçamento dentro do botâo */
+        /* border none: utilizei para remover a borda do elemento */
+        /* border-radius: utilizei para arredondar as bordas do elemento em 5px */
+        /* cursor:pointer: Utilzei para que quando o usuário passar o cursor encima do botão ficar visíivel que*/
+        display: inline-block;   
+        padding: 10px 20px;
+        background-color: #00336a;
+        color: #7fffbd;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease-in-out;
+        text-align: center;
+}
+
+button:hover {
+    background-color: #4281a4;
+    color: antiquewhite;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+li {
+    margin-bottom: 0px;
+    background-color: #05ffff;
+    padding: 8px;
+    border-radius: 0px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+    </style>
+    <h1>Gerenciador array</h1>
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" placeholder="Insira um Nome:">
+    
+    <label for="profissao">Profissão:</label>
+    <input type="text" id="profissao" placeholder="Insira a Profissão:"><br><br>
+    
+    <button onclick="adicionar()">Adicionar</button>
+    <button onclick="remover()">Remover</button>
+    
+    <ul id="listaPessoas"></ul>
+    
+    <script>
+        const nomes = [];
+        const profissoes = [];
+        
+        function adicionar() {
+            const nome = document.getElementById("nome").value;
+            const profissao = document.getElementById("profissao").value;
+            
+            nomes.push(nome);
+            profissoes.push(profissao);
+            
+            atualizarLista();
+        }
+        
+        function remover() {
+            const nome = document.getElementById("nome").value;
+            const index = nomes.indexOf(nome);
+            
+            if (index !== -1) {
+                nomes.splice(index, 1);
+                profissoes.splice(index, 1);
+                alert(`${nome} removido(a) com sucesso.`);
+            } else {
+                alert(`${nome} não encontrado(a).`);
+            }
+            
+            atualizarLista();
+        }
+        
+        function atualizarLista() {
+            const listaPessoas = document.getElementById("listaPessoas");
+            listaPessoas.innerHTML = "";
+            
+            for (let i = 0; i < nomes.length; i++) {
+                const item = document.createElement("li");
+                item.textContent = `${nomes[i]} - ${profissoes[i]}`;
+                listaPessoas.appendChild(item);
+            }
+        }
+    </script>
+</body>
+</html>
